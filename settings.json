@@ -1,23 +1,26 @@
 {
-    "machines": [
-        {
-            "pin": 14,
-            "id": "0501"
-        },
-        {
-            "pin": 15,
-            "id": "0502"
-        },
-        {
-            "pin": 18,
-            "id": "0503"
-        },
-        {
-            "pin": 23,
-            "id": "0504"
-        }
-    ],
-    "location": "RC4L5",
-    "endpoint": "http://localhost:8000",
-    "timeout": 5
+  "machines": [
+    {
+      "pin": 14,
+      "pos": 0
+    },
+    {
+      "pin": 15,
+      "pos": 1
+    },
+    {
+      "pin": 18,
+      "pos": 2
+    },
+    {
+      "pin": 23,
+      "pos": 3
+    }
+  ],
+  "location": "RC4L0",
+  "endpoint": "",
+  "timeout": 5,
+  "floor": 0,
+  "ping_server_frequency": 60,
+  "token": ""
 }

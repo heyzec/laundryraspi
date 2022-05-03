@@ -10,7 +10,7 @@
 # 3. Reboot and profit.
 
 # Safety feature in case this script is accidentally run wrongly
-grep -q 'Raspbian' /etc/os-release || echo This is not a raspberry pi!; exit
+#grep -q 'Raspbian' /etc/os-release || echo This is not a raspberry pi!; exit
 
 
 countrycode="SG"

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is not used anymore!
+
 echo Please change the default password of the RPi.
 echo Default password is 'raspberry'.
 passwd

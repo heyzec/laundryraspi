@@ -15,14 +15,14 @@
 
 countrycode="SG"
 echo Enter NUSNET ID to setup
-read -p 'NUSNET (e0123456): ' nusnetid
+read -rp 'NUSNET (e0123456): ' nusnetid
 userid="nusstu\\$nusnetid"
 passmatch=false
 
 getpass() {
-    read -sp 'Password: ' userpass
+    read -srp 'Password: ' userpass
     echo
-    read -sp 'Confirm password: ' userpassconf
+    read -srp 'Confirm password: ' userpassconf
 
     if [[ "$userpass" == "$userpassconf" ]]; then
         passmatch=true
@@ -41,13 +41,13 @@ do
 done
 
 # https://eparon.me/2016/09/09/rpi3-enterprise-wifi.html
-passhashraw=`echo -n "${userpass}" | iconv -t utf16le | openssl md4`
+passhashraw=$(echo -n "${userpass}" | iconv -t utf16le | openssl md4)
 
 # https://stackoverflow.com/questions/21906330/remove-stdin-label-in-bash
 passhash=${passhashraw#*= }
 
 echo pass is "${userpass}"
-echo passhash is $passhash
+echo passhash is "$passhash"
 
 # https://eparon.me/2016/09/09/rpi3-enterprise-wifi.html
 wpasuppconftext="ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev

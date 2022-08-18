@@ -1,0 +1,1 @@
+* * * * * /home/pi/wifi-check.sh >> /home/pi/.log/network.log 2>&1

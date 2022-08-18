@@ -18,9 +18,9 @@
     }
   ],
   "location": "RC4L0",
-  "endpoint": "",
+  "endpoint": "https://laundry-api-offline.caprover.chikawara.xyz",
   "timeout": 5,
   "floor": 0,
   "ping_server_frequency": 60,
-  "token": ""
+  "token": "lostmysocks"
 }

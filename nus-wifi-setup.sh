@@ -13,11 +13,10 @@
 #grep -q 'Raspbian' /etc/os-release || echo This is not a raspberry pi!; exit
 
 
-countrycode="SG"
-echo Enter NUSNET ID to setup
-read -rp 'NUSNET (e0123456): ' nusnetid
-userid="nusstu\\$nusnetid"
-passmatch=false
+if [[ $(id -u) -ne 0 ]] ; then echo "Please run as root" ; exit 1 ; fi
+
+
+COUNTRY_CODE="SG"
 
 getpass() {
     read -srp 'Password: ' userpass
@@ -31,6 +30,12 @@ getpass() {
     fi
 }
 
+echo Enter NUSNET ID to setup
+read -rp 'NUSNET (e0123456): ' nusnetid
+userid="nusstu\\$nusnetid"
+
+
+passmatch=false
 getpass
 while [[ "$passmatch" == false ]];
 do
@@ -46,27 +51,26 @@ passhashraw=$(echo -n "${userpass}" | iconv -t utf16le | openssl md4)
 # https://stackoverflow.com/questions/21906330/remove-stdin-label-in-bash
 passhash=${passhashraw#*= }
 
-echo pass is "${userpass}"
 echo passhash is "$passhash"
 
 # https://eparon.me/2016/09/09/rpi3-enterprise-wifi.html
 wpasuppconftext="ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
-country=$countrycode
+country=$COUNTRY_CODE
 network={
     priority=1
-    ssid=\"NUS_STU_2-4GHz\"
+    ssid=\"NUS_STU\"
     key_mgmt=WPA-EAP
     eap=PEAP
     identity=\"$userid\"
     password=hash:$passhash
     phase2=\"auth=MSCHAPV2\"
-    }"
+}"
 
 echo "$wpasuppconftext" > /etc/wpa_supplicant/wpa_supplicant.conf
 
 
-cat <<EOF >> /etc/dhcpcd.conf
+cat >> /etc/dhcpcd.conf <<EOF
 interface wlan0
 env ifwireless=1
 env wpa_supplicant_driver=wext,nl80211

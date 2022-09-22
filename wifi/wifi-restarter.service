@@ -1,0 +1,14 @@
+[Unit]
+Description=Restarter script to ensure wifi always connected
+After=network.target
+
+[Service]
+User=laundry
+WorkingDirectory=/home/laundry/laundryraspi/wifi
+ExecStart=python wifi-restarter.py
+Restart=always
+TimeoutStopSec=2
+
+[Install]
+WantedBy=multi-user.target
+
